@@ -94,4 +94,19 @@ The script includes several adjustable parameters that can be tuned according to
 - **Variable**: `density_threshold`
 - **Description**: Controls the threshold for removing low-density vertices from the mesh. 
 - **Default**: `0.01` (1% quantile)
-- **Example**: `density_threshold = 0.05` will re
+- **Example**: `density_threshold = 0.05` will remove more vertices, creating a cleaner but potentially less detailed mesh.
+
+
+## Contact
+
+If you have any questions, suggestions, or issues, please feel free to reach out.
+
+- **Email**: [itcouldbe0@yonsei.ac.kr](mailto:itcouldbe0@yonsei.ac.kr)
+
+This project was created and maintained by **Jaden Jang**, a 4th-year undergraduate student in **Civil & Environmental Engineering** at Yonsei University.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
