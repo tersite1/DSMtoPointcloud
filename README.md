@@ -70,10 +70,16 @@ The script includes several adjustable parameters that can be tuned according to
 
 ### 1. **Height Scaling Factor**
 
+You can adjust Created 3D Object's height for purpose(Verical images etc..)
+
+![height](https://github.com/tersite1/DSMtoPLY/blob/main/HeightSample.png?raw=true/.png)
+
 - **Variable**: `height_scaling_factor`
 - **Description**: Adjusts the height (z-values) of the DSM data to better reflect the real-world heights of buildings.
 - **Default**: `1.5`
 - **Example**: `height_scaling_factor = 2.0` will double the height of buildings.
+
+- 
 
 ### 2. **Poisson Reconstruction Depth**
 
