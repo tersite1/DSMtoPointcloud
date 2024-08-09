@@ -4,28 +4,32 @@ import open3d as o3d
 from tqdm import tqdm
 
 # Output paths: Set the paths for saving the results
-output_ply_path = 'your_path/output.ply'  # Path for the point cloud PLY file
-output_mesh_ply_path = 'your_path/mesh_output.ply'  # Path for the high-quality mesh PLY file
-output_mesh_obj_path = 'your_path/mesh_output.obj'  # Path for the high-quality mesh OBJ file
+output_ply_path = 'Your_path/output.ply'  # Path for the point cloud PLY file
+output_mesh_ply_path = 'Your_path/mesh_output.ply'  # Path for the high-quality mesh PLY file
+output_mesh_obj_path = 'Your_path/mesh_output.obj'  # Path for the high-quality mesh OBJ file
+
+# Scaling factor for building heights
+height_scaling_factor = 1.5  # Adjust this value based on your specific needs
 
 # Display progress bar for DSM Image Load
 print("Loading DSM Image...")
 with tqdm(total=100, desc="Progress", ncols=100) as pbar:
-    dsm_image = Image.open('your_tif_path/.tif')
+    dsm_image = Image.open('/Your_image.tif')
     dsm_array = np.array(dsm_image)
     pbar.update(20)  # 20% completed
-
-    
 
 # Check if the DSM array is empty or not
 if dsm_array.size == 0:
     raise ValueError("DSM image data is empty. Please check the input file.")
 
+# Apply scaling factor to z-values
+print(f"Applying height scaling factor of {height_scaling_factor}...")
+z = dsm_array.flatten() * height_scaling_factor  # Scale the height values
+
 # Create Ply using vectorized numpy operations: Generate point cloud using vectorized operations
 print("Creating Point Cloud...")
 h, w = dsm_array.shape  # Get the height and width of the DSM image
 x, y = np.meshgrid(np.arange(w), np.arange(h))  # Create a grid of x and y coordinates
-z = dsm_array.flatten()  # Flatten the elevation data into a 1D array
 points = np.vstack((x.flatten(), y.flatten(), z)).T  # Combine x, y, z coordinates into a single array to form points
 pbar.update(20)  # 40% completed
 
