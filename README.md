@@ -21,9 +21,7 @@ Below are the results of the 3D data creation process:
 ### Object Created (OBJ)
 ![Object Created](https://github.com/user-attachments/assets/1620f371-4eb6-47fa-aabe-e350874160a1)
 
-## Project Overview
 
-This project leverages Open3D to process DSM images, generating 3D meshes and point clouds suitable for further analysis and visualization. The script is optimized for performance and can handle satellite imagery, including urban areas with buildings.
 
 ## Features
 
@@ -31,6 +29,11 @@ This project leverages Open3D to process DSM images, generating 3D meshes and po
 - **3D Mesh Generation**: Creates 3D meshes using Poisson surface reconstruction.
 - **Multi-format Export**: Outputs results in both `.ply` and `.obj` formats.
 - **Height Adjustment**: Adjusts building heights to better match reality.
+
+You can adjust Created 3D Object's height for purpose(Verical images etc..)
+
+![height](https://github.com/tersite1/DSMtoPLY/blob/main/HeightSample.png?raw=true/.png)
+
 
 ## Usage
 
@@ -70,9 +73,6 @@ The script includes several adjustable parameters that can be tuned according to
 
 ### 1. **Height Scaling Factor**
 
-You can adjust Created 3D Object's height for purpose(Verical images etc..)
-
-![height](https://github.com/tersite1/DSMtoPLY/blob/main/HeightSample.png?raw=true/.png)
 
 - **Variable**: `height_scaling_factor`
 - **Description**: Adjusts the height (z-values) of the DSM data to better reflect the real-world heights of buildings.
