@@ -2,6 +2,11 @@
 
 This project showcases the process of converting Digital Surface Model (DSM) data into high-quality 3D mesh and point cloud outputs. The DSM image used for this process, along with the generated outputs, are displayed below.
 
+Updates 
+
+** 1.0versionInitial Release '24.08.09
+** 1.1version Zero Division Error Fixed, Empty Information Area is now filled with lowest Z level. '24.08.10
+
 ## Target DSM Image
 
 This is the target DSM image that was used to create the 3D data:
