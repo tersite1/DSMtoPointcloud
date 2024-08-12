@@ -17,14 +17,18 @@ This is the target DSM image that was used to create the 3D data:
 
 Below are the results of the 3D data creation process:
 
-### Mesh Created
-![Mesh Created](https://github.com/user-attachments/assets/02c29db7-323e-4c1e-aaea-0f6326adcb39)
-
 ### Point Cloud Created
 ![Point Cloud Created](https://github.com/user-attachments/assets/a84d837d-5890-49dd-bb5c-49c462a3ca74)
 
+
+### Mesh Created
+![Mesh Created](https://github.com/user-attachments/assets/02c29db7-323e-4c1e-aaea-0f6326adcb39)
+
+
+
 ### Object Created (OBJ)
-![Object Created](https://github.com/user-attachments/assets/1620f371-4eb6-47fa-aabe-e350874160a1)
+![Object Created](https://github.com/tersite1/DSMtoPointcloud/blob/main/MeshCreated1.png?raw=true)
+![Object Created](https://github.com/tersite1/DSMtoPointcloud/blob/main/MeshCreated2.png?raw=true)
 
 
 
