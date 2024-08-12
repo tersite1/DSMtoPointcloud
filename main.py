@@ -8,13 +8,13 @@ output_ply_path = 'Your_path/output.ply'  # Path for the point cloud PLY file
 output_mesh_ply_path = 'Your_path/mesh_output.ply'  # Path for the high-quality mesh PLY file
 output_mesh_obj_path = 'Your_path/mesh_output.obj'  # Path for the high-quality mesh OBJ file
 
-# Scaling factor for building heights
+ Scaling factor for building heights
 height_scaling_factor = 1.5  # Adjust this value based on your specific needs
 
 # Display progress bar for DSM Image Load
 print("Loading DSM Image...")
 with tqdm(total=100, desc="Progress", ncols=100) as pbar:
-    dsm_image = Image.open('/Your_image.tif')
+    dsm_image = Image.open('/yourimage.tif')
     dsm_array = np.array(dsm_image)
     pbar.update(20)  # 20% completed
 
@@ -42,28 +42,27 @@ pbar.update(20)  # 60% completed
 # **Normal Estimation**: Estimate normals for the point cloud
 print("Estimating Normals...")
 point_cloud.estimate_normals(search_param=o3d.geometry.KDTreeSearchParamHybrid(radius=1.0, max_nn=30))
-# The radius and max_nn parameters define the search radius and the number of nearest neighbors to consider; adjust if needed
 pbar.update(10)  # 70% completed
 
-# Poisson Surface Reconstruction with GPU (if available): Generate a mesh using GPU
-print("Performing Poisson Surface Reconstruction...")
-mesh, densities = o3d.geometry.TriangleMesh.create_from_point_cloud_poisson(point_cloud, depth=12, scale=1.1)
-# The depth and scale parameters control the level of detail and scaling of the mesh; adjust if needed
+# **Remove Outliers**
+print("Removing Outliers...")
+cl, ind = point_cloud.remove_statistical_outlier(nb_neighbors=20, std_ratio=2.0)
+point_cloud = point_cloud.select_by_index(ind)
+
+# Option 1: Perform Poisson Surface Reconstruction with adjusted parameters
+# print("Performing Poisson Surface Reconstruction...")
+# mesh, densities = o3d.geometry.TriangleMesh.create_from_point_cloud_poisson(point_cloud, depth=6, scale=1.0)
+# pbar.update(10)  # 80% completed
+
+# Option 2: Perform Ball Pivoting Algorithm (BPA)
+print("Performing Ball Pivoting Algorithm...")
+radii = [0.5, 1.0, 2.0]  # Adjust these radii based on your data
+mesh = o3d.geometry.TriangleMesh.create_from_point_cloud_ball_pivoting(
+    point_cloud, o3d.utility.DoubleVector(radii)
+)
 pbar.update(10)  # 80% completed
 
-# Check if densities array is empty to avoid errors
-densities_np = np.asarray(densities)
-if densities_np.size == 0:
-    raise ValueError("Densities array is empty. Poisson reconstruction might have failed. Check the input point cloud.")
-
-# Remove low-density vertices to refine the mesh
-print("Refining Mesh...")
-vertices_to_remove = densities_np < np.quantile(densities_np, 0.01)  # Identify vertices to remove based on density threshold
-if np.any(vertices_to_remove):
-    mesh.remove_vertices_by_mask(vertices_to_remove)  # Remove the identified vertices from the mesh
-pbar.update(10)  # 90% completed
-
-# Save high-quality mesh to PLY and OBJ files
+# Refine and Save the mesh
 print("Saving Mesh and Point Cloud...")
 o3d.io.write_triangle_mesh(output_mesh_ply_path, mesh)  # Save as PLY
 o3d.io.write_triangle_mesh(output_mesh_obj_path, mesh)  # Save as OBJ
