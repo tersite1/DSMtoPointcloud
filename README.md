@@ -2,6 +2,8 @@
 
 This project showcases the process of converting Digital Surface Model (DSM) data into high-quality 3D mesh and point cloud outputs. The DSM image used for this process, along with the generated outputs, are displayed below.
 
+
+## Currently Researching, Any researcher with passion who wants to collab is welcome
 #### Updates 
 
 * 1.0 VersionInitial Release '24.08.09
